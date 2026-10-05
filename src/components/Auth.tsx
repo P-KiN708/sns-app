@@ -11,18 +11,6 @@ function Auth() {
     const handleSignUp = async () => {
         setLoading(true)
         setMessage('')
-        const { error } = await supabase.auth.signUp({ email, password })
-        if (error) {
-            setMessage(`登録エラー: ${error.message}`)
-        } else {
-            setMessage('登録しました。確認メールをご確認ください。')
-        }
-        setLoading(false)
-    }
-
-    const handleSignIn = async () => {
-        setLoading(true)
-        setMessage('')
 
         const { data, error } = await supabase.auth.signUp({ email, password })
         if (error) {
@@ -30,13 +18,26 @@ function Auth() {
             setLoading(false)
             return
         }
-
+        
         if (data.user) {
             const username = email.split('@')[0]
             await supabase.from('profiles').insert({ id: data.user.id, username})
         }
 
-        setMessage('登録しました！確認メールをチェックしてください。')
+        setMessage('登録しました！確認メールをご確認ください。')
+        setLoading(false)
+    }
+
+    const handleSignIn = async () => {
+        setLoading(true)
+        setMessage('')
+
+        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        if (error) {
+            setMessage(`ログインエラー: ${error.message}`)         
+        } else {
+            setMessage('ログインしました！')
+        }
         setLoading(false)
     }
 
