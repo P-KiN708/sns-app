@@ -1,0 +1,22 @@
+.settings-form {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 320px;
+}
+
+.settings-label {
+    font-size: 13px;
+    color: var(--text-sub);
+}
+
+.settings-form .post-submit-button {
+    align-self: flex-start;
+    padding: 8px 24px;
+}
+
+.settings-message {
+    font-size: 14px;
+    color: var(--accent);
+}
