@@ -1,75 +1,32 @@
-# React + TypeScript + Vite
+# SNS App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+X(旧Twitter)を参考にした、シンプルなSNSアプリです。
+React・TypeScript・Supabaseを使い、認証からデータベース連携まで一通り実装しました。
 
-Currently, two official plugins are available:
+## 🔗 デモ
+https://sns-app-green-zeta.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 使用技術
+- React / TypeScript
+- React Router(ルーティング)
+- Supabase(認証・データベース・Row Level Security)
+- Vite
+- Vercel(デプロイ)
 
-## React Compiler
+## ✨ 実装した機能
+- メール/パスワードによる認証(サインアップ・ログイン・ログアウト)
+- 投稿の作成・削除
+- いいね機能
+- コメント機能
+- プロフィール(ユーザー名)編集
+- レスポンシブ対応のダークテーマUI
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 💡 工夫した点
+- Supabaseのテーブル設計において、`posts`・`profiles`・`likes`・`comments`間の外部キー制約とRow Level Security(RLS)を設定し、自分のデータのみ操作できるよう設計
+- コンポーネント単位でCSSファイルを分割し、保守性を意識したスタイリング
+- クリックイベントの伝播(`stopPropagation`)を活用し、投稿一覧のクリック範囲といいね・削除ボタンの操作性を両立
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+## 📝 今後の課題
+- 画像投稿機能の追加
+- リアルタイム更新(Supabase Realtimeの活用)
+- 通知機能
